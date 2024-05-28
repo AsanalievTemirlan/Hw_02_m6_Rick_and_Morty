@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hw_02_m6_Rick&amp;Morty</string>
+    <string name="gender">Gender:</string>
+    <string name="first_seen_in">First seen in:</string>
+</resources>
