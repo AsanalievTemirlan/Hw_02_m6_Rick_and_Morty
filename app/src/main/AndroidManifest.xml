@@ -17,11 +17,6 @@
             android:exported="false"
             android:theme="@style/Theme.Hw_02_m6_RickMorty" />
         <activity
-            android:name=".ui.DetailActivity"
-            android:exported="false"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/Theme.Hw_02_m6_RickMorty" />
-        <activity
             android:name=".ui.CharactersActivity"
             android:exported="true">
             <intent-filter>
