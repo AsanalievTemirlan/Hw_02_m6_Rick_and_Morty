@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -28,18 +28,15 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_rick_sanchez" />
-
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="370dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_material1"
@@ -69,7 +66,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="   Alive - Human"
+                            android:text="Alive - Human"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="normal" />
@@ -94,7 +91,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Lat known location: "
+                            android:text="Last known location:"
                             android:textColor="@color/dark_white"
                             android:textSize="18sp" />
 
@@ -122,41 +119,50 @@
                             android:textStyle="normal"
                             android:text="Pilot" />
 
-                        <LinearLayout
-                            android:orientation="vertical"
+                        <!-- Вместо LinearLayout используем ConstraintLayout и фиксируем высоту для ExpandableListView -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <ExpandableListView
                                 android:id="@+id/expandableListView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_width="0dp"
+                                android:layout_height="200dp"
                                 android:divider="@android:color/darker_gray"
                                 android:dividerHeight="0.5dp"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" >
-                            </ExpandableListView>
+                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ExpandableListView
                                 android:id="@+id/expandableListView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:divider="@android:color/darker_gray"
+                                android:layout_width="0dp"
+                                android:layout_height="200dp"
+                                android:divider="@color/dark_white"
                                 android:dividerHeight="0.5dp"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/expandableListView" />
 
                             <ExpandableListView
                                 android:id="@+id/expandableListView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="0dp"
+                                android:layout_height="200dp"
                                 android:divider="@android:color/darker_gray"
                                 android:dividerHeight="0.5dp"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/expandableListView2" />
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </RelativeLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

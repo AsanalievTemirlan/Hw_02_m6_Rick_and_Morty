@@ -24,10 +24,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initListData() {
-        listGroup = listOf("Season 1","Season 2")
+        listGroup = listOf("Season 1","Season 2","Season 2","Season 2","Season 2","Season 2","Season 2")
 
         val episodeList = listOf(
             Episode("Pilot", "December 13, 2013"),
+            Episode("Episode 2", "December 20, 2013"),
+            Episode("Episode 2", "December 20, 2013"),
+            Episode("Episode 2", "December 20, 2013"),
+            Episode("Episode 2", "December 20, 2013"),
             Episode("Episode 2", "December 20, 2013")
         )
 
