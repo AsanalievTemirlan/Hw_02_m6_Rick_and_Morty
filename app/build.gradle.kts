@@ -89,4 +89,11 @@ dependencies {
     //OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    //Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    val lifecycle_version = "2.8.1"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    //Coil
+    implementation ("io.coil-kt:coil:2.4.0")
 }

@@ -33,7 +33,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:layout_marginTop="-36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -119,46 +119,8 @@
                             android:textStyle="normal"
                             android:text="Pilot" />
 
-                        <!-- Вместо LinearLayout используем ConstraintLayout и фиксируем высоту для ExpandableListView -->
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
 
-                            <ExpandableListView
-                                android:id="@+id/expandableListView"
-                                android:layout_width="0dp"
-                                android:layout_height="200dp"
-                                android:divider="@android:color/darker_gray"
-                                android:dividerHeight="0.5dp"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ExpandableListView
-                                android:id="@+id/expandableListView2"
-                                android:layout_width="0dp"
-                                android:layout_height="200dp"
-                                android:divider="@color/dark_white"
-                                android:dividerHeight="0.5dp"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/expandableListView" />
-
-                            <ExpandableListView
-                                android:id="@+id/expandableListView3"
-                                android:layout_width="0dp"
-                                android:layout_height="200dp"
-                                android:divider="@android:color/darker_gray"
-                                android:dividerHeight="0.5dp"
-                                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/expandableListView2" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
+                        
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </RelativeLayout>

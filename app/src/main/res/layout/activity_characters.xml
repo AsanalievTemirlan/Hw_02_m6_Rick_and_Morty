@@ -19,12 +19,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-    <Button
-        android:id="@+id/button"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-
+        android:layout_height="match_parent"
+        android:id="@+id/rv_rick"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_character"/>
 
 </FrameLayout>

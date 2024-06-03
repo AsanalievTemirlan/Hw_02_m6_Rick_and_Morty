@@ -17,10 +17,10 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        expandableListView = binding.expandableListView
-        initListData()
-        expandableListAdapter = CustomExpandableListAdapter(this, listGroup, listItem)
-        expandableListView.setAdapter(expandableListAdapter)
+//        expandableListView = binding.expandableListView
+//        initListData()
+//        expandableListAdapter = CustomExpandableListAdapter(this, listGroup, listItem)
+//        expandableListView.setAdapter(expandableListAdapter)
     }
 
     private fun initListData() {
@@ -35,6 +35,6 @@ class DetailActivity : AppCompatActivity() {
             Episode("Episode 2", "December 20, 2013")
         )
 
-        listItem = hashMapOf(listGroup[0] to episodeList)
+//        listItem = hashMapOf(listGroup to episodeList)
     }
 }

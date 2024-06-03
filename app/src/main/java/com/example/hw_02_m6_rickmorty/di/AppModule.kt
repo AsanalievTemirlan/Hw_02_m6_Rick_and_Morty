@@ -18,13 +18,12 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://rickandmortyapi.com/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-    }
+    fun provideRetrofit(okHttpClient: OkHttpClient) = Retrofit.Builder()
+        .baseUrl("https://rickandmortyapi.com/api/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
+
 
     @Provides
     fun provideOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
@@ -35,14 +34,12 @@ class AppModule {
     }
 
     @Provides
-    fun provideInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
+    fun provideInterceptor() = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+
     }
 
     @Provides
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
-    }
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
 }
