@@ -22,13 +22,11 @@ import javax.inject.Inject
 class CharactersActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCharactersBinding
-    private lateinit var adapter: CharactersAdapter
+    private var adapter: CharactersAdapter = CharactersAdapter()
     private val viewModel by lazy {
         ViewModelProvider(this)[CharacterViewModel::class.java]
     }
-    var isLoading = false
-    var isLastPage = false
-    var isScrolling = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCharactersBinding.inflate(layoutInflater)
@@ -51,12 +49,13 @@ class CharactersActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        viewModel.getCharacter().observe(this) { resource ->
+        viewModel.getCharacters().observe(this) { resource ->
             when (resource) {
                 is Resource.Loading -> {
+
                 }
                 is Resource.Success -> {
-
+                    adapter.submitList(resource.data)
 
                 }
                 is Resource.Error -> {
@@ -65,56 +64,6 @@ class CharactersActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun setUpRecyclerView() {
-        adapter = CharactersAdapter()
-        binding.rvRick.apply {
-            setHasFixedSize(true)
-            adapter = adapter
-            layoutManager = LinearLayoutManager(this@CharactersActivity)
-            addOnScrollListener(this@CharactersActivity.scrollListener)
-        }
-    }
-
-    private val scrollListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                isScrolling = true
-            }
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-            val visibleItemCount = layoutManager.childCount
-            val totalItemCount = layoutManager.itemCount
-            val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
-            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
-            val isNotAtBeginning = firstVisibleItemPosition >= 0
-            val isTotalMoreThanVisible = totalItemCount >= QUERY_PAGE_SIZE
-            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning
-                    && isTotalMoreThanVisible && isScrolling
-            if (shouldPaginate) {
-                viewModel.nextPage()
-                isScrolling = false
-            }
-        }
-    }
-
-    private fun hideProgressBar() {
-        binding.progressBar.visibility = View.INVISIBLE
-    }
-
-    private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    companion object {
-        private const val QUERY_PAGE_SIZE = 20
-    }
-
 }
 
 

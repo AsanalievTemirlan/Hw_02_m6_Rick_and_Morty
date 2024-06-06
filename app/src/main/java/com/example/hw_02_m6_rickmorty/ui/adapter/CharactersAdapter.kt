@@ -2,8 +2,8 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.dispose
 import coil.load
@@ -12,12 +12,13 @@ import com.example.hw_02_m6_rickmorty.R
 import com.example.hw_02_m6_rickmorty.data.model.Character
 import com.example.hw_02_m6_rickmorty.databinding.ItemCharacterBinding
 
-class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHolder>() {
+class CharactersAdapter : ListAdapter<Character, CharactersAdapter.CharacterViewHolder>(DiffCallback()) {
 
-    inner class CharacterViewHolder(val binding: ItemCharacterBinding ) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class CharacterViewHolder(val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root){
 
-    val differCallback = object : DiffUtil.ItemCallback<Character>() {
+    }
+
+    class DiffCallback : DiffUtil.ItemCallback<Character>() {
         override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
             return oldItem.id == newItem.id
         }
@@ -26,8 +27,6 @@ class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHo
             return oldItem == newItem
         }
     }
-
-    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding = ItemCharacterBinding.inflate(
@@ -40,15 +39,13 @@ class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHo
 
     @SuppressLint("SetTextI18n", "LogNotTimber")
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val character = differ.currentList[position]
+        val character = getItem(position)
         holder.binding.apply {
             characterName.text = character.name
             lastKnownLocation.text = character.location?.name
             firstSeenIn.text = character.origin?.name
-
             characterImage.load(character.image) {
                 crossfade(true)
-                transformations(CircleCropTransformation())
             }
             characterSpecies.text = character.species
             characterStatus.text = character.status
@@ -67,18 +64,10 @@ class CharactersAdapter : RecyclerView.Adapter<CharactersAdapter.CharacterViewHo
         }
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
-
     private var onItemClickListener: ((Character) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Character) -> Unit) {
         onItemClickListener = listener
-    }
-
-    fun submitList(list: List<Character>) {
-        differ.submitList(list)
     }
 
     override fun onViewRecycled(holder: CharacterViewHolder) {
