@@ -8,15 +8,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.hw_02_m6_rickmorty.R
-import com.example.hw_02_m6_rickmorty.data.Repository
 import com.example.hw_02_m6_rickmorty.databinding.ActivityCharactersBinding
 import com.example.hw_02_m6_rickmorty.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CharactersActivity : AppCompatActivity() {
@@ -42,27 +39,23 @@ class CharactersActivity : AppCompatActivity() {
         binding.rvRick.layoutManager = LinearLayoutManager(this)
         binding.rvRick.adapter = adapter
 
-        // Настройка обработчика кликов на элементах адаптера
-        adapter.setOnItemClickListener { character ->
-            Toast.makeText(this, "Clicked: ${character.name}", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun observeData() {
-        viewModel.getCharacters().observe(this) { resource ->
+        viewModel.getCharacters().observe(this, Observer { resource ->
             when (resource) {
-                is Resource.Loading -> {
-
-                }
                 is Resource.Success -> {
                     adapter.submitList(resource.data)
-
                 }
                 is Resource.Error -> {
-
+                    Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+                    // Показываем индикатор загрузки, если требуется
                 }
             }
-        }
+        })
+
     }
 }
 
