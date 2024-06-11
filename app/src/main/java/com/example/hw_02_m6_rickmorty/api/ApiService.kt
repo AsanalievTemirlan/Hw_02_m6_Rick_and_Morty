@@ -5,11 +5,12 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import com.example.hw_02_m6_rickmorty.data.model.Character
+import retrofit2.http.Query
+
 interface ApiService {
     @GET("character")
-    suspend fun getCharacters(): Response<BaseResponse<Character>>
-
+    suspend fun getCharacters(@Query("page") page: Int): Response<BaseResponse<Character>>
 
     @GET("character/{id}")
-    suspend fun getCharacterDetails(@Path("id") id: Int): Response<Character>
+    suspend fun getCharacterDetails(@Path("id") id: Int): Response<BaseResponse<Character>>
 }

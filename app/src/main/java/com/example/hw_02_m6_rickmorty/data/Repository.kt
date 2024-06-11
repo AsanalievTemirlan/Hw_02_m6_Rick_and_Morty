@@ -1,8 +1,11 @@
 package com.example.hw_02_m6_rickmorty.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.hw_02_m6_rickmorty.api.ApiService
 import com.example.hw_02_m6_rickmorty.data.model.Character
 import com.example.hw_02_m6_rickmorty.utils.Resource
@@ -13,22 +16,14 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(private val api: ApiService) {
 
-    fun getCharacters(): LiveData<Resource<List<Character>>> {
-        return liveData(Dispatchers.IO) {
-            try {
-                val response = api.getCharacters()
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        emit(Resource.Success(it.results))
-                    }
-                } else {
-                    emit(Resource.Error(response.message()))
-                }
-            } catch (e: IOException) {
-                emit(Resource.Error(e.localizedMessage ?: "Unknown error"))
-            } catch (e: HttpException) {
-                emit(Resource.Error(e.localizedMessage ?: "Unknown error"))
-            }
-        }
+    fun getCharacters(page: Int = 1): LiveData<PagingData<Character>> {
+        return Pager(
+            pagingSourceFactory = {
+                CharacterPagingSource(api)
+            },
+            config = PagingConfig(
+                pageSize = 20
+            )
+        ).liveData
     }
 }

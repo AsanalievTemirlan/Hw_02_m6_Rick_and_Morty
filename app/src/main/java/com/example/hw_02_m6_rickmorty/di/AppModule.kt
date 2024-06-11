@@ -1,6 +1,7 @@
 package com.example.hw_02_m6_rickmorty.di
 
 import com.example.hw_02_m6_rickmorty.api.ApiService
+import com.example.hw_02_m6_rickmorty.data.CharacterPagingSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,4 +43,8 @@ class AppModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
+    @Provides
+    fun provideCharacterPagingSource(apiService: ApiService): CharacterPagingSource {
+        return CharacterPagingSource(apiService)
+    }
 }

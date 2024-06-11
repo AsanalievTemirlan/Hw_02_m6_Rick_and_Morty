@@ -96,4 +96,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     //Coil
     implementation ("io.coil-kt:coil:2.5.0")
+    //Paging
+    val paging_version = "3.3.0"
+    implementation("androidx.paging:paging-runtime:$paging_version")
+
+
 }

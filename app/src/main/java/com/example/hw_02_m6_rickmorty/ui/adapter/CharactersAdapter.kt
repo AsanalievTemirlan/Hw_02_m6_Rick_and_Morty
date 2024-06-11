@@ -1,8 +1,7 @@
-import android.R
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,13 +9,9 @@ import coil.load
 import com.example.hw_02_m6_rickmorty.data.model.Character
 import com.example.hw_02_m6_rickmorty.databinding.ItemCharacterBinding
 
+class CharactersAdapter : PagingDataAdapter<Character, CharactersAdapter.CharacterViewHolder>(DiffCallback()) {
 
-class CharactersAdapter :
-    ListAdapter<Character, CharactersAdapter.CharacterViewHolder>(DiffCallback()) {
-
-    inner class CharacterViewHolder(val binding: ItemCharacterBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
+    inner class CharacterViewHolder(val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(character: Character) = with(binding) {
             characterName.text = character.name
@@ -56,20 +51,24 @@ class CharactersAdapter :
         return CharacterViewHolder(binding)
     }
 
-    @SuppressLint("SetTextI18n", "LogNotTimber")
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = getItem(position)
-        holder.onBind(character)
+        if (character != null) {
+            holder.onBind(character)
+        }
         holder.binding.root.setOnClickListener {
-            onItemClickListener?.invoke(character)
-            Log.d("TAG", "${character.id}")
+            if (character != null) {
+                onItemClickListener?.invoke(character)
+            }
+            if (character != null) {
+                Log.d("TAG", "${character.id}")
+            }
         }
     }
+
+    private var onItemClickListener: ((Character) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Character) -> Unit) {
+        onItemClickListener = listener
+    }
 }
-
-private var onItemClickListener: ((Character) -> Unit)? = null
-
-fun setOnItemClickListener(listener: (Character) -> Unit) {
-    onItemClickListener = listener
-}
-
