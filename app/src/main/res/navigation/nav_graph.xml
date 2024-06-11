@@ -7,12 +7,12 @@
 
     <activity
         android:id="@+id/charactersActivity"
-        android:name="com.example.hw_02_m6_rickmorty.ui.CharactersActivity"
+        android:name="com.example.hw_02_m6_rickmorty.ui.character.CharactersActivity"
         android:label="activity_characters"
         tools:layout="@layout/activity_characters" />
     <activity
         android:id="@+id/detailActivity"
-        android:name="com.example.hw_02_m6_rickmorty.ui.DetailActivity"
+        android:name="com.example.hw_02_m6_rickmorty.ui.character_detail.DetailActivity"
         android:label="activity_detail"
         tools:layout="@layout/activity_detail" />
 </navigation>

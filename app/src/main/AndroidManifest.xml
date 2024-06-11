@@ -15,11 +15,11 @@
         android:theme="@style/Theme.Hw_02_m6_RickMorty"
         tools:targetApi="31">
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".ui.character_detail.DetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Hw_02_m6_RickMorty" />
         <activity
-            android:name=".ui.CharactersActivity"
+            android:name=".ui.character.CharactersActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

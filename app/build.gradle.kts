@@ -91,6 +91,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    //ViewModel
     val lifecycle_version = "2.8.1"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
@@ -99,6 +100,7 @@ dependencies {
     //Paging
     val paging_version = "3.3.0"
     implementation("androidx.paging:paging-runtime:$paging_version")
-
+    //Koin
+    implementation("io.insert-koin:koin-android:3.5.6")
 
 }
